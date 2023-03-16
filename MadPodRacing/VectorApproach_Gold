@@ -1,0 +1,28 @@
+prev_x=0
+prev_y=0
+x, y, next_checkpoint_x, next_checkpoint_y, next_checkpoint_dist, next_checkpoint_angle = map(int, input().split())
+opponent_x, opponent_y = [int(i) for i in input().split()]
+print(str(next_checkpoint_x) + " " + str(next_checkpoint_y) + " " + str(100))
+while True:
+    prev_x=x
+    prev_y=y
+    # next_checkpoint_x: x position of the next check point
+    # next_checkpoint_y: y position of the next check point
+    # next_checkpoint_dist: distance to the next checkpoint
+    # next_checkpoint_angle: angle between your pod orientation and the direction of the next checkpoint
+    x, y, next_checkpoint_x, next_checkpoint_y, next_checkpoint_dist, next_checkpoint_angle = [int(i) for i in input().split()]
+    opponent_x, opponent_y = [int(i) for i in input().split()]
+    thrust = 0
+    if next_checkpoint_angle>90 or next_checkpoint_angle<-90:
+        thrust = str(0)
+    elif next_checkpoint_dist > 7500:
+        thrust = 'BOOST'
+    else:
+        thrust = str(100)
+    
+    # You have to output the target position
+    # followed by the power (0 <= thrust <= 100)
+    # i.e.: "x y thrust"
+    velocity_x= next_checkpoint_x-(x-prev_x)*3
+    velocity_y= next_checkpoint_y-(y-prev_y)*3
+    print(str(velocity_x) + " " + str(velocity_y) + " " + str(thrust))
